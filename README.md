@@ -12,7 +12,7 @@
       - [Kapitel 2.2.2 64-Bit-Verwechslung](#kapitel-222-64-bit-verwechslung)
       - [Kapitel 2.2.3 NX-Bit](#kapitel-223-nx-bit)
       - [Kapitel 2.3.4 CPU](#kapitel-234-cpu)
-        - [Kapitel 2.3.6.2 Band](#kapitel-2362-band)
+        - [Kapitel 2.3.6.2 Magnetisch](#kapitel-2362-magnetisch)
 
 ## Klausurrelevante Kapitel
 
@@ -24,7 +24,7 @@
 ### Kapitel 1.4 Röhren
 
 Röhren: Versuch der 40er/50er Jahre, einen PC zu bauen. Bekanntes Modell der US Armee ENIAC, Verwendung von 18.000 Röhren mit einer gesamten Leistungsaufnahme von 174 kW. Jedoch unzuverlässig, da immer Röhren defekt.
-GB funktionsfähige Maschine (Enigma) in WW2 mit 1500 Röhren, Leistungsaufnahme 4,5 kW
+GB funktionsfähige Maschine in WW2 mit 1500 Röhren, Leistungsaufnahme 4,5 kW
 
 ### Kapitel 2.2 Klassifizierung BS
 
@@ -78,8 +78,8 @@ Interer Aufbau einer CPU normalerweise mit Registern dargestellt.
 Bei alten CPUs immer bestimmtes Register bei arithmetischen oder logischen Funktionen involviert (=Akkumulator). Rechenergebnisse landen immer bei Akkumulator. Bei heutigen CPUs geschieht dies nur noch bei sspeziellen Befehlen.
 Mittlerweile können mit jedem Register alle Operationen durchgeführt werden.
 
-##### Kapitel 2.3.6.2 Band
-
+##### Kapitel 2.3.6.2 Magnetisch
+**Band**
 Erste Massenspeicher waren Bänder. In Anfangszeit Zweckentfremdung von Audio-Tonspeichern.
 
 Heutzutage immernoch bewährtes Medium zur Speicherung von Backups. 
@@ -88,3 +88,51 @@ Zugruff auf Bänder findet sequentiell statt.
 
 - Nachteil: Zugriffsgeschwindigkeit gering, im Minutentbereich
 - Vorteil: Bei Virenbefall nicht alle Daten direkt verfügbar: Verbreitung verlangsamt.
+
+| Laufwerkstyp | Speichergröße |
+| ------ | ------ |
+|LTO-1 | 100 GB |
+| ... | ... |
+|LTO-8 | 12 TB |
+
+**Diskette**
+
+Zwischenlösung zwischen Magnetbandspeicher und Magnetplatte. Ähnlichkeiten mit Magnetband jedoch Vorteil des wahlfreien Zugriffs.
+
+- Direkter Kontakt Schreiblesekopf und Medium
+- starker Verschleiß und geringe Lebensdauer
+- Entwicklung zu immer kleiner und höhrerer Speicherdichte
+
+| Übliche Größe | Eingeführt | Speicher-Kapazität|
+| --- | --- | --- |
+| 8 Zoll | 1970er | 80 kByte bis 256 kByte |
+| 5,25 Zoll | 1980er | 360 kByte bis 1,2 MByte |
+| 3,5 Zoll | 1980er | 720 kByte bis 1,4 MByte |
+
+**Platte**
+
+Funktionsweise wie Bänder oder Disketten jedoch Schreiblesekopf schwebend über Medium. Der dadurch entstehende Luftwirbel der Rotation der Platte herrscht sorgt hierfür. Wenn Platte ausgeschaltet wird, fällt Kopf in eine Landing Zone, in der keine Daten gespeichert sind.
+
+Vorteile:
+
+- hohe Rotation und dadurch kurze Zugriffszeiten
+- hohe Übertragungsrate
+
+Hauptwartezeit hängt von Umdrehungsgeschwindigkeit ab, da Kopf im Mittel eine halbe Umdrehung warten muss, bis gesuchte Daten vorbei kommen.
+
+Innenraum einer Festplatte ist mit staubfreiem Gas gefüllt. Staubpartikel würde zu Headcrash führen.
+
+Speicherentwicklung kontinuierlich verbessert.
+
+- Große Verbesserung durch GMR-Effekt (Giant Magneto Resistance): quantenmechanischer Effekt mit dem Zweck einen kleineren Lesekopf zu konstruieren. Ab 1995 konnte diese Technik in Platten genutzt werden.
+- Weitere Steigerung 2008 durch Magnetisierung des Schreibkopfes
+- 2013 SMR (Shingled Magnetic Recording) um mehr magnetische Bits auf eine Platte zu bekommen. Bei Magnetisierung eizelner Bits musste immer SIcherheitsabstand eingehalten werden. Schreibkopf ist größer als Lesekopf. Beim Lesen der nun kleineren Magnetzonen macht dies kein Problem, weil der wesentlich kleinere GMR-Lesekopf keine Probleme damit hat.
+
+Aktuelle Festplatten speichern zwischen 2 Lücken aktuell ca. 40 MByte an Daten.
+
+**Ausblick auf zukünftige Generationen**
+
+Ausnutzung aller in der Vergangenheit eingeführten Technologien liefern maximale Größe von 18 TB.
+
+- HAMR (Heat Assisted Magnetic Recording): Laser erhitzt zu schreibendes Material. Dadurch sinkt benötigte magnetische Feldstärke.
+- MAMR (Microwave Assisted Magnetic Recording): direkt bei Schreibkopf Material aufgeweicht durch elektromagnetische Mikrowellenstrahlung.
