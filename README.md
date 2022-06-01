@@ -16,6 +16,10 @@
   - [Kapitel 2.4 Architekturen](#kapitel-24-architekturen)
   - [Kapitel 2.4.1 Von-Neumann](#kapitel-241-von-neumann)
   - [Kapitel 2.4.2](#kapitel-242)
+  - [Kapitel 2.5 PC-Bussystem](#kapitel-25-pc-bussystem)
+  - [Kapitel 2.5.1 ISA](#kapitel-251-isa)
+  - [Kapitel 2.5.2 PCI](#kapitel-252-pci)
+  - [Kapitel 2.5.3 PCI-Express](#kapitel-253-pci-express)
 
 ## Klausurrelevante Kapitel
 
@@ -181,3 +185,39 @@ Dadruch 2 Vorteile:
 Programmspeicher ist bei normaler Ausführung Nur-Lese-Speicher. Bei Embedded Systemen oft sogar in ROM-Speicher abgelegt.
 
 Modifizierte Version (Modified-Harvard) z.B. als Cache in modernen Systemen implementiert.
+
+## Kapitel 2.5 PC-Bussystem
+
+## Kapitel 2.5.1 ISA
+
+Erster Standard Bus für PCs war der von IBM in den 1980ern entwickelte ISA-Bus (Industry Standard Architecture). Vorerst als XT-Bus mit 8-Bit-Datenbusbreite und 4,7 MHz. Wenig später 18 Bit mit 8,33 MHz.
+
+![ISA-BUS](img/isa-bus.png)
+
+Der gesamte Systembus wird direkt auf den ISA-Stecker geführt. Spätere Entwicklung ISA-BUS mit 32 Bit hat sich nicht durchgesetzt.
+
+Für Industrieanwendungen werden noch ISA-Slot-Systeme verwendet (Altlasten) durch ISA-Hardware-Emulation.
+
+## Kapitel 2.5.2 PCI
+
+Einführung PCI-Bus (Peripheral Component Interconnect) Mitte 90er Jahre. BUS hat keine direkte Verbindung mehr zu CPU. Verbindung stattdessen über Chipsatz des Prozessors.
+
+PCI-Bus trennt Daten und Adressleitungen nicht, sondern Multiplexing. Adresse und Daten haben beide 32-Bit, Taltfrequenz 33 MHz. Übertragungsrate im [Burst-Modus](https://de.wikipedia.org/wiki/Burst-Modus_(Daten%C3%BCbertragung)) maximal 133 Mbyte/s.
+
+Später Entwicklung einer 64-Bit-Variante (PCI-X) mit Stecker doppelter Größe, hauptsächlich für Serverbetrieb, jedoch kein Erfolg auf dem Markt.
+
+## Kapitel 2.5.3 PCI-Express
+
+Bei Entwicklung paralleler Bussysteme entsteht Problem, dass alle Signale auf allen Leitungen zwischen allen Komponenten gleich lang unterwegs sein müssen. Abhilfe durch künstliche Verlängerung von Leiterbahnen mittels Mäander (Schlaufen zur künstlichen Verlängerung).
+
+![Mäander](img/maeander.png)
+
+Diese Methode begrenzt jedoch Datendurchsatz. Steigerung nur möglich durch Aufgabe des parallelen Datendurchsatzes zu seriellem Durchsatz.
+
+PCIe (ca. ab 2003) Ersetzung des Busses durch serielle Punkt zu Punkt Verbindung (Lane). 
+
+Taktfrequent bei PCIe-1 2,5 GHz, Verdopplung der Übertragungsrate von 32-Bit-PCI.
+
+Zusammenschalten von bis zu 16 Lanes um noch mehr Daten gleichzeitig zu übertragen. Die so übertragenen Daten treffen nicht gleichzeitig an Ziel ein uns müssen wieder korrekt Zusammengesetzt werden.
+
+PCIe ist für Software nicht sichtbar, da die parallel-seriell-parellel Wandlung direkt von Hardware übernommen wird.
