@@ -13,6 +13,9 @@
     - [Kapitel 2.2.3 NX-Bit](#kapitel-223-nx-bit)
     - [Kapitel 2.3.4 CPU](#kapitel-234-cpu)
     - [Kapitel 2.3.6.2 Magnetisch](#kapitel-2362-magnetisch)
+  - [Kapitel 2.4 Architekturen](#kapitel-24-architekturen)
+  - [Kapitel 2.4.1 Von-Neumann](#kapitel-241-von-neumann)
+  - [Kapitel 2.4.2](#kapitel-242)
 
 ## Klausurrelevante Kapitel
 
@@ -136,3 +139,45 @@ Ausnutzung aller in der Vergangenheit eingeführten Technologien liefern maximal
 
 - HAMR (Heat Assisted Magnetic Recording): Laser erhitzt zu schreibendes Material. Dadurch sinkt benötigte magnetische Feldstärke.
 - MAMR (Microwave Assisted Magnetic Recording): direkt bei Schreibkopf Material aufgeweicht durch elektromagnetische Mikrowellenstrahlung.
+
+## Kapitel 2.4 Architekturen
+
+## Kapitel 2.4.1 Von-Neumann
+
+Architektur, nach der fast alle modernen PCs aufgebaut sind. Erster Computer (Zuse Z1) hatte Von-Neumann Struktur.
+
+Prinzip: es existiert nur ein einzelnes Bussystem. Dies können Daten oder Programmcode sein.
+
+Nachteil: Bus wird abwechselnd für Speicher und Daten verwendet. Es wird nur eine Sorte Arbeitsspeicher benötigt, der für alles zuständig ist.
+
+![Von-Neumann-Architektur](img/von-neumann.png)
+
+Problem damals: Daten und Programmcode haben sich gegenseitig aus Cache "geworfen" (Cache-Trashing). Lösung durch Einführung von:
+
+- Cache für Daten
+- Cache für Programmcode
+
+Vorgehen ähnelt CPU intern der [Harvard-Architektur](https://de.wikipedia.org/wiki/Harvard-Architektur)
+
+**Nachteil der Von-Neumann Architketur:**
+
+Software kann ihren eigenen Programmcode verändern. Schadsoftware kann dies als Möglichkeit der Ausbreitung nutzen.
+
+## Kapitel 2.4.2
+
+Entwicklung durch IBM und Harvard-Universität 1944.
+
+**Wichtigstes Merkmal:**
+
+Physikalisch getrennte Speicher und Busse für Programmcode und Daten.
+
+![Harvard-Architektur](img/harvard.png)
+
+Dadruch 2 Vorteile:
+
+- Zugriff auf Speicher bei Befehlsabarbeitung doppelt so schnell
+- Nahezu unmöglich, dass Programm eigenen Code überschreibt.
+
+Programmspeicher ist bei normaler Ausführung Nur-Lese-Speicher. Bei Embedded Systemen oft sogar in ROM-Speicher abgelegt.
+
+Modifizierte Version (Modified-Harvard) z.B. als Cache in modernen Systemen implementiert.
