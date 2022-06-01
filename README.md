@@ -8,11 +8,11 @@
   - [Klausurrelevante Kapitel](#klausurrelevante-kapitel)
     - [Kapitel 1.4 Röhren](#kapitel-14-röhren)
     - [Kapitel 2.2 Klassifizierung BS](#kapitel-22-klassifizierung-bs)
-      - [Kapitel 2.2.1 Bitbreite](#kapitel-221-bitbreite)
-      - [Kapitel 2.2.2 64-Bit-Verwechslung](#kapitel-222-64-bit-verwechslung)
-      - [Kapitel 2.2.3 NX-Bit](#kapitel-223-nx-bit)
-      - [Kapitel 2.3.4 CPU](#kapitel-234-cpu)
-        - [Kapitel 2.3.6.2 Magnetisch](#kapitel-2362-magnetisch)
+    - [Kapitel 2.2.1 Bitbreite](#kapitel-221-bitbreite)
+    - [Kapitel 2.2.2 64-Bit-Verwechslung](#kapitel-222-64-bit-verwechslung)
+    - [Kapitel 2.2.3 NX-Bit](#kapitel-223-nx-bit)
+    - [Kapitel 2.3.4 CPU](#kapitel-234-cpu)
+    - [Kapitel 2.3.6.2 Magnetisch](#kapitel-2362-magnetisch)
 
 ## Klausurrelevante Kapitel
 
@@ -28,7 +28,7 @@ GB funktionsfähige Maschine in WW2 mit 1500 Röhren, Leistungsaufnahme 4,5 kW
 
 ### Kapitel 2.2 Klassifizierung BS
 
-#### Kapitel 2.2.1 Bitbreite
+### Kapitel 2.2.1 Bitbreite
 
 Bitbreite wird durch die Menge des adressierbaren Speichers entschieden.
 CPU könnte theoretisch mehr adressieren, jedoch EInschränkung durch Busbreite (z.B. 32 Bit).
@@ -40,14 +40,14 @@ Gängige Systeme auf dem Markt:
 - 32 Bit (max 4 GB)
 - 64 Bit (max 64 ExaByte = 18 Millionen Terrabyte)
 
-#### Kapitel 2.2.2 64-Bit-Verwechslung
+### Kapitel 2.2.2 64-Bit-Verwechslung
 
 Jede Speicheradresse ist 64 Bit breit. Adressierung eines Datums dauert z.B. doppelt so lang gegenüber 32 Bit.
 Vorteil ergibt sich erst, wenn mehr als 4 GB RAM verwendet werden.
 
 Aktuelle Prozessoren verwenden zudem maximal 45 echte Adressleitungen, somit limitiert auf 45 Bit. Maximal anprechbarer Speicher sind damit 256 TB.
 
-#### Kapitel 2.2.3 NX-Bit
+### Kapitel 2.2.3 NX-Bit
 
 *No-eXecute-Bit*
 
@@ -57,7 +57,7 @@ Verwendeung um zu speichern, ob an Adresse Daten oder Programmcode abgelegt ist.
 
 ![64-Bit-Adresse](img/bs-44-bit.PNG)
 
-#### Kapitel 2.3.4 CPU
+### Kapitel 2.3.4 CPU
 
 Die CPU (Central Processing Unit) ist zentrales Element in einem Computer. 
 
@@ -78,7 +78,7 @@ Interer Aufbau einer CPU normalerweise mit Registern dargestellt.
 Bei alten CPUs immer bestimmtes Register bei arithmetischen oder logischen Funktionen involviert (=Akkumulator). Rechenergebnisse landen immer bei Akkumulator. Bei heutigen CPUs geschieht dies nur noch bei sspeziellen Befehlen.
 Mittlerweile können mit jedem Register alle Operationen durchgeführt werden.
 
-##### Kapitel 2.3.6.2 Magnetisch
+### Kapitel 2.3.6.2 Magnetisch
 **Band**
 Erste Massenspeicher waren Bänder. In Anfangszeit Zweckentfremdung von Audio-Tonspeichern.
 
