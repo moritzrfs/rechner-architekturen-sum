@@ -8,18 +8,18 @@
   - [Klausurrelevante Kapitel](#klausurrelevante-kapitel)
     - [Kapitel 1.4 Röhren](#kapitel-14-röhren)
     - [Kapitel 2.2 Klassifizierung BS](#kapitel-22-klassifizierung-bs)
-    - [Kapitel 2.2.1 Bitbreite](#kapitel-221-bitbreite)
-    - [Kapitel 2.2.2 64-Bit-Verwechslung](#kapitel-222-64-bit-verwechslung)
-    - [Kapitel 2.2.3 NX-Bit](#kapitel-223-nx-bit)
-    - [Kapitel 2.3.4 CPU](#kapitel-234-cpu)
-    - [Kapitel 2.3.6.2 Magnetisch](#kapitel-2362-magnetisch)
+    - [2.2.1 Bitbreite](#221-bitbreite)
+    - [2.2.2 64-Bit-Verwechslung](#222-64-bit-verwechslung)
+    - [2.2.3 NX-Bit](#223-nx-bit)
+    - [2.3.4 CPU](#234-cpu)
+    - [2.3.6.2 Magnetisch](#2362-magnetisch)
   - [Kapitel 2.4 Architekturen](#kapitel-24-architekturen)
-  - [Kapitel 2.4.1 Von-Neumann](#kapitel-241-von-neumann)
-  - [Kapitel 2.4.2](#kapitel-242)
+  - [2.4.1 Von-Neumann](#241-von-neumann)
+  - [2.4.2 Harvard-Architektur](#242-harvard-architektur)
   - [Kapitel 2.5 PC-Bussystem](#kapitel-25-pc-bussystem)
-  - [Kapitel 2.5.1 ISA](#kapitel-251-isa)
-  - [Kapitel 2.5.2 PCI](#kapitel-252-pci)
-  - [Kapitel 2.5.3 PCI-Express](#kapitel-253-pci-express)
+  - [2.5.1 ISA](#251-isa)
+  - [2.5.2 PCI](#252-pci)
+  - [2.5.3 PCI-Express](#253-pci-express)
 
 ## Klausurrelevante Kapitel
 
@@ -35,7 +35,7 @@ GB funktionsfähige Maschine in WW2 mit 1500 Röhren, Leistungsaufnahme 4,5 kW
 
 ### Kapitel 2.2 Klassifizierung BS
 
-### Kapitel 2.2.1 Bitbreite
+### 2.2.1 Bitbreite
 
 Bitbreite wird durch die Menge des adressierbaren Speichers entschieden.
 CPU könnte theoretisch mehr adressieren, jedoch EInschränkung durch Busbreite (z.B. 32 Bit).
@@ -47,14 +47,14 @@ Gängige Systeme auf dem Markt:
 - 32 Bit (max 4 GB)
 - 64 Bit (max 64 ExaByte = 18 Millionen Terrabyte)
 
-### Kapitel 2.2.2 64-Bit-Verwechslung
+### 2.2.2 64-Bit-Verwechslung
 
 Jede Speicheradresse ist 64 Bit breit. Adressierung eines Datums dauert z.B. doppelt so lang gegenüber 32 Bit.
 Vorteil ergibt sich erst, wenn mehr als 4 GB RAM verwendet werden.
 
 Aktuelle Prozessoren verwenden zudem maximal 45 echte Adressleitungen, somit limitiert auf 45 Bit. Maximal anprechbarer Speicher sind damit 256 TB.
 
-### Kapitel 2.2.3 NX-Bit
+### 2.2.3 NX-Bit
 
 *No-eXecute-Bit*
 
@@ -64,7 +64,7 @@ Verwendeung um zu speichern, ob an Adresse Daten oder Programmcode abgelegt ist.
 
 ![64-Bit-Adresse](img/bs-44-bit.PNG)
 
-### Kapitel 2.3.4 CPU
+### 2.3.4 CPU
 
 Die CPU (Central Processing Unit) ist zentrales Element in einem Computer. 
 
@@ -85,7 +85,7 @@ Interer Aufbau einer CPU normalerweise mit Registern dargestellt.
 Bei alten CPUs immer bestimmtes Register bei arithmetischen oder logischen Funktionen involviert (=Akkumulator). Rechenergebnisse landen immer bei Akkumulator. Bei heutigen CPUs geschieht dies nur noch bei sspeziellen Befehlen.
 Mittlerweile können mit jedem Register alle Operationen durchgeführt werden.
 
-### Kapitel 2.3.6.2 Magnetisch
+### 2.3.6.2 Magnetisch
 **Band**
 Erste Massenspeicher waren Bänder. In Anfangszeit Zweckentfremdung von Audio-Tonspeichern.
 
@@ -146,7 +146,7 @@ Ausnutzung aller in der Vergangenheit eingeführten Technologien liefern maximal
 
 ## Kapitel 2.4 Architekturen
 
-## Kapitel 2.4.1 Von-Neumann
+## 2.4.1 Von-Neumann
 
 Architektur, nach der fast alle modernen PCs aufgebaut sind. Erster Computer (Zuse Z1) hatte Von-Neumann Struktur.
 
@@ -167,7 +167,7 @@ Vorgehen ähnelt CPU intern der [Harvard-Architektur](https://de.wikipedia.org/w
 
 Software kann ihren eigenen Programmcode verändern. Schadsoftware kann dies als Möglichkeit der Ausbreitung nutzen.
 
-## Kapitel 2.4.2
+## 2.4.2 Harvard-Architektur
 
 Entwicklung durch IBM und Harvard-Universität 1944.
 
@@ -188,7 +188,7 @@ Modifizierte Version (Modified-Harvard) z.B. als Cache in modernen Systemen impl
 
 ## Kapitel 2.5 PC-Bussystem
 
-## Kapitel 2.5.1 ISA
+## 2.5.1 ISA
 
 Erster Standard Bus für PCs war der von IBM in den 1980ern entwickelte ISA-Bus (Industry Standard Architecture). Vorerst als XT-Bus mit 8-Bit-Datenbusbreite und 4,7 MHz. Wenig später 18 Bit mit 8,33 MHz.
 
@@ -198,7 +198,7 @@ Der gesamte Systembus wird direkt auf den ISA-Stecker geführt. Spätere Entwick
 
 Für Industrieanwendungen werden noch ISA-Slot-Systeme verwendet (Altlasten) durch ISA-Hardware-Emulation.
 
-## Kapitel 2.5.2 PCI
+## 2.5.2 PCI
 
 Einführung PCI-Bus (Peripheral Component Interconnect) Mitte 90er Jahre. BUS hat keine direkte Verbindung mehr zu CPU. Verbindung stattdessen über Chipsatz des Prozessors.
 
@@ -206,7 +206,7 @@ PCI-Bus trennt Daten und Adressleitungen nicht, sondern Multiplexing. Adresse un
 
 Später Entwicklung einer 64-Bit-Variante (PCI-X) mit Stecker doppelter Größe, hauptsächlich für Serverbetrieb, jedoch kein Erfolg auf dem Markt.
 
-## Kapitel 2.5.3 PCI-Express
+## 2.5.3 PCI-Express
 
 Bei Entwicklung paralleler Bussysteme entsteht Problem, dass alle Signale auf allen Leitungen zwischen allen Komponenten gleich lang unterwegs sein müssen. Abhilfe durch künstliche Verlängerung von Leiterbahnen mittels Mäander (Schlaufen zur künstlichen Verlängerung).
 
