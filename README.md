@@ -40,6 +40,10 @@
     - [3.4.4.3 Out Of Order Execution](#3443-out-of-order-execution)
     - [3.4.4.4 Branch Prediction](#3444-branch-prediction)
     - [3.4.4.5 Fazit](#3445-fazit)
+  - [5.2.2 Dynamisch (DRAM)](#522-dynamisch-dram)
+    - [5.2.2.1 Standard-DRAM](#5221-standard-dram)
+    - [5.2.2.2 EDO](#5222-edo)
+    - [5.2.2.3 SDR/DDR/QDR](#5223-sdrddrqdr)
 
 ## Klausurrelevante Kapitel
 
@@ -440,4 +444,108 @@ Zusammenspiel von:
 
 sorgt für Performance Steigerung
 
-Alle Optimierungen Zusammen bilden Sicherheitslücke (Stichwörter: Spectre, Meltdown). 
+Alle Optimierungen Zusammen bilden Sicherheitslücke (Stichwörter: Spectre, Meltdown).
+
+## 5.2.2 Dynamisch (DRAM)
+
+### 5.2.2.1 Standard-DRAM
+
+DRAM-Speicher (Dynamic Random Access Management) basiert auf einem kleinen Kondensator, in dem Bit Wert mittels elektrischer Ladung gespeichert wird.
+
+- Vorteil: nur ein Transistor zur Bit Speicherung nötig
+
+![DRAM Bit](img/dram-bit.png)
+
+- Größe heutzutage im Gigabit Bereich
+- Kondensator entlädt sich von selbst
+- Vor jedem Verlorengehen muss Inhalt ausgelesen werden
+- Zyklisches Auslesen im Refresh Zyklus
+
+Darstellung des DRAM-Speichers in einem 2-Dimensionalen Array
+
+- Wortleitungen
+- Bit-Leitungen
+
+Zugriff auf Kondensator erfolgt über:
+
+- RAS (Row-Adress-Select, Zeilenadresse)
+- CAS (Column-Adress-Select, Spaltenadresse) unterteilt
+
+:arrow_right: Zugriffdauer heutzutage im Bereich 40-60 nS mit Zugriffstaktfrequenz von 16-15 MHz
+
+Wen nur ein Adressteil verwendet wird :arrow_right: Zugriff doppelt so schnell
+
+RAM-Module
+
+- Parallelschaltung der Adressierungseingänge werden bei mehreren DRAM-Bausteinen eingesetzt
+- Für jedes Bit des RAM-Moduls war eigener Baustein zuständig
+
+Heutzutage 4-Bit
+
+Parallelschaltung
+
+- Führt bei manchen Rechner-Designs zu einer Überlastung des Adressbusses
+  - Kann verhindert werden, indem vor Adressleitungen der Bausteine auf RAM-Modul ein zusätzlicher Buffer geschaltet wird :arrow_right: Bufferd-RAM
+  - Wenn zusätzlich noch Zwischenspeicher (Latch) für Adresse vorgeschalten wird, spricht man von Registered-Ram
+
+![registered ram](img/reg-ram.png)
+
+### 5.2.2.2 EDO
+
+- Addressierungsphase dauert gewisse Zeit
+- Bis nach Abschluss dieser Phase sind Daten auf dem Adressbus ungültig
+
+- Diese Wartezeit kann anderweitig genutzt werden:
+  - Einführung eines extra Buffers in die Datenausgänge der RAM-Bausteine (Enhanced Dynamic Output
+- Während Adressierungsphase ist in Datenbuffer noch das vorherige Datenwort gespeichert und liegt auf Datenbus
+  - :arrow_right: Verschachtelter Adressierung möglich
+
+Nachteil von EDO-RAM:
+
+- Asynchrone Arbeitsweise
+- Zeiten zwischen den RAS und CAS nicht gleichmäßig, jeder RAM-Baustein ist anders
+  - :arrow_right: der langsamste Baustein bestimmt Schreib-/Leserate
+  - Einbeziehung von Sicherheitsreserve für Schwankunen durch z.B. Temperaturunterschiede
+
+### 5.2.2.3 SDR/DDR/QDR
+
+**SDR**
+
+- Einführung eines gemeinsamen Takts für gesamten RAM-Baustein
+  - Alle Steuersignale beziehen sich auf Taktsignal
+
+Prozessoren schreiben/lesen durch zwischengeschalteten Chache Speicher im Burst Mode
+
+- Lesen von immer 16 Bytes hintereinander
+
+Speicherbausteine wurden insofern optimiert, dass Speicherzugriffe auf aufeinanderfolgende Adressen schnell stattfinden
+
+Durch:
+- Pipelining
+- Vervielfachungder Speicherbänke
+- mehrere Buffer innerhalb des RAM-Bausteins
+
+Verdopplung Geschwindigkeit gegenüber EDO-RAM
+
+**DDR/QDR**
+
+Synchrone Ausgabe von SDRAM schnell wieder zu langsam.
+Deshalb:
+
+- Pro Taktperiode Ausgabe von 2x Datenworten statt 1x :arrow_right: DDR (Double Data Rate)
+
+| Standard | Zugriffe |
+| --- | --- |
+| DDR2 | 2 Zugriffe |
+| DDR3 | 3 Zugriffe |
+| DDR4 | 4 Zugriffe |
+
+:arrow_right: Daten im Voraus bereithalten (Prefetch) 
+QDR-SDRAM (Quad Data Rate Synchronous Dynamic
+Random Access Memory)
+
+**5.2.2.4 Fazit**
+
+Zugriffszeit des ersten wahlfreien Zugriffs heute immer noch 40-60 nS. Maximale Zugriffstaktfrequenz 16-25 MHz.
+
+:arrow_right: Problem umgehen durch Einführen eines schnellern Cache Speichers zwischen RAM und CPU
