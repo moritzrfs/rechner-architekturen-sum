@@ -44,6 +44,10 @@
     - [5.2.2.1 Standard-DRAM](#5221-standard-dram)
     - [5.2.2.2 EDO](#5222-edo)
     - [5.2.2.3 SDR/DDR/QDR](#5223-sdrddrqdr)
+  - [5.3 Nichtflüchtige Speicher (ROM)](#53-nichtflüchtige-speicher-rom)
+  - [5.3.1 Allgemeines](#531-allgemeines)
+    - [5.3.1.1 Maskenprogrammiert (Fuse)](#5311-maskenprogrammiert-fuse)
+    - [5.3.1.2 Elektrisch Programmierbar](#5312-elektrisch-programmierbar)
 
 ## Klausurrelevante Kapitel
 
@@ -549,3 +553,23 @@ Random Access Memory)
 Zugriffszeit des ersten wahlfreien Zugriffs heute immer noch 40-60 nS. Maximale Zugriffstaktfrequenz 16-25 MHz.
 
 :arrow_right: Problem umgehen durch Einführen eines schnellern Cache Speichers zwischen RAM und CPU
+
+## 5.3 Nichtflüchtige Speicher (ROM)
+
+## 5.3.1 Allgemeines
+
+### 5.3.1.1 Maskenprogrammiert (Fuse)
+
+Speicherbausteine erster Computer war ROM (Read-Only-Memory), mittlerweile fast ausgestorben
+:arrow_right: Vorteil durch schnelle Zugriffszeit
+
+### 5.3.1.2 Elektrisch Programmierbar
+
+- Information eines Bits wird in Floating Gate eines Feldeffekttransistors gespeichert
+  - mittels Glas-Elektroden vom Rest isoliert und elektrisch nicht angeschlossen
+
+**Schreiben**
+
+- Anlegen einer höheren Spannung (ca. 12-25 V) an Control-Gate und den Drain
+- Source liegt auf 0 V
+  - :arrow_right: Transistor wird leitend und hoher Strom fließt zwischen Source und Drain
