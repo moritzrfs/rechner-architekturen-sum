@@ -48,6 +48,20 @@
   - [5.3.1 Allgemeines](#531-allgemeines)
     - [5.3.1.1 Maskenprogrammiert (Fuse)](#5311-maskenprogrammiert-fuse)
     - [5.3.1.2 Elektrisch Programmierbar](#5312-elektrisch-programmierbar)
+  - [5.3.2 EPROM: Bezeichnung 27xxx](#532-eprom-bezeichnung-27xxx)
+    - [5.3.3 EEPROM](#533-eeprom)
+      - [5.3.3.2 Parallel: Bezeichnung 28xxx](#5332-parallel-bezeichnung-28xxx)
+      - [5.3.3.3 Seriell](#5333-seriell)
+  - [5.3.4 Flash](#534-flash)
+    - [5.3.4.1 Allgemeines](#5341-allgemeines)
+    - [5.3.4.2 NOR-Flash](#5342-nor-flash)
+    - [5.3.4.3 NAND-Flash](#5343-nand-flash)
+    - [5.3.4.4 Vergleich NAND-NOR-Flash](#5344-vergleich-nand-nor-flash)
+    - [5.3.4.5 SLC MLC TLC QLC](#5345-slc-mlc-tlc-qlc)
+    - [5.3.4.6 3D-NAND Flash](#5346-3d-nand-flash)
+  - [5.3.5 Modernere Speicherentwicklungen](#535-modernere-speicherentwicklungen)
+    - [5.3.5.1 Überblick](#5351-überblick)
+    - [5.3.5.2 FRAM](#5352-fram)
 
 ## Klausurrelevante Kapitel
 
@@ -573,3 +587,136 @@ Speicherbausteine erster Computer war ROM (Read-Only-Memory), mittlerweile fast 
 - Anlegen einer höheren Spannung (ca. 12-25 V) an Control-Gate und den Drain
 - Source liegt auf 0 V
   - :arrow_right: Transistor wird leitend und hoher Strom fließt zwischen Source und Drain
+  - Elektronen wandern mittels quantenmechanischem Tunneleffekt durch untere 50nm Glas-Elektrode auf Floating Gate
+  - Bis Abschalten der Spannung bleiben sie dort
+
+![glaselektrode](img/glaselektrode.png)
+
+**Lesen 0**
+
+- Lesevorgang ebenfalls über Control-Gate
+- Jedoch kleinere Spannung als beim Schreiben
+- Wenn Transistor ungeladen ist (0), verhält sich Floating-Gate anders als bei geladenem
+  - Wie normaler MOSFET :arrow_right: Durchsteuerung und an Ausgang und Leseverstärker liegen 0 V
+
+**Lesen 1**
+
+- Durch geladenes Floating-Gate (1) wird Durchsteuern verhindert
+- Transistor ist gesperrt: :arrow_right:
+  - Ausgang und Leseverstärker 3 V
+
+## 5.3.2 EPROM: Bezeichnung 27xxx
+
+Nichtflüchtiger löschbarer Speicher: (Erasable Programmable Read Only Memory)
+
+- Löschen nach Beschreibung mittels UV-Licht
+  - Dauer ~20min. Nur 100 mal möglich da Kristallstruktur durch UV- Strahlung zerstört wird
+- Quarzglas-Fenster eingebaut, damit UV-Licht durchdringend kann: Wellenlänge 254nm.
+  - Restliches Gehäuse aus Keramik gefertigt
+- Löschen mittel Photoeffekt
+
+EPROM Werte:
+
+- Datenbusbreite 8-Bit
+- Größen zwischen 64 kBit und 8Mbit
+
+### 5.3.3 EEPROM
+
+Nichtflüchtiger elektrisch löschbarer Speicher: (Electrically Erasable Programmable Read Only Memory)
+
+- Erzeugung der Spannung für Schreibvorgang intern
+- Verschiedene Verfahren zum Löschen der Daten
+  - größere negative Spannung an COntrol-Gate anlegen
+  - oder positive Spannung am Dran Anschluss
+  - oder MOSFET
+
+#### 5.3.3.2 Parallel: Bezeichnung 28xxx
+
+Ersatz für EPROMS da Pinkompatibel.
+
+- Löschung einzeln oder durch Blöcke möglich
+- Ausgestorben :arrow_right: durch Flash-Bausteine ersetzt
+
+#### 5.3.3.3 Seriell
+
+Heute oft in Embedded-Systemen verwendet
+
+- Löschung fast jeder Speicherzellen einzeln möglich: mehrere 10.000 mal möglich
+- Dauer von Speichern inkl. Löschung im Millisekunden Bereich
+- 8-Polige Bauform
+
+Nutzung z.B. auf DRAM-Moduk als Speicher für Referrnzdaten (Versorgungsspannung, Speicherkapazität, Timing, Refresh-Daten)
+
+## 5.3.4 Flash
+
+### 5.3.4.1 Allgemeines
+
+Bit SPeicherung ebenfalls in Floating-Gate von Feldeffektransistor gespeichert.
+
+Unterscheidung in NOR-Flash und NAND-Flash
+
+![nand nor flash](img/nand-nor-flash.png)
+
+### 5.3.4.2 NOR-Flash
+
+Ausführung der einzelnen Zellen als Matrix mit wahlfreiem Zugriff
+
+- Zugriff überr Adress-Wortleitung
+
+### 5.3.4.3 NAND-Flash
+
+Hintereinanderschlatung von Gruppen von Zellen.
+
+- Bei Zugriff auf einzelen Zelle müssen alle Nachbarzellen in Kette durchgesteuert werden
+- Wegen Signalübertragung durch Nachbartransistoren weniger zuverlässig als NOR-Flash
+- Haltbarkeit gegenüber NOR-Flash 1/10
+
+### 5.3.4.4 Vergleich NAND-NOR-Flash
+
+| Eigenschaft | NOR | NAND |
+| --- | --- | --- |
+| wahlfreier Zugriff | ja | nein |
+| Löschgeschwindigkeit | langsam | schnell |
+| Fläche/Zelle | groß | klein |
+| Zuverlässigkeit | hoch | niedrig |
+| Verwendung | Programmspeicher in Mikrocontrollern | USB-Sticks, Speicherkarten, Festplatten |
+
+### 5.3.4.5 SLC MLC TLC QLC
+
+Für Speicherung von mehr Informationen pro Fläche, Entwicklung, mehr als eine 1 Bit information in Flash-Zelle zu speichern
+
+- Menge der in das Floating-Gate fließenden Elektronen über zeit oder angelegte Spannung gesteuert
+  - 3 Füllstufen: Speicherung von 2 Bit in Zelle
+
+![slc](img/mlc.png)
+
+MLC-Zelle
+
+Mit 7 Füllstufen Speicherung von 3-Bit
+
+![tlc-zelle](img/tlc.png)
+
+Beim Auslesen muss eine Trennung der Füllstufen ermittelt werden.
+Schon ab TLC Fehlerkorrektur aufwändig
+- Je mehr Füllstufen, desto weniger Löschzyklen
+
+### 5.3.4.6 3D-NAND Flash
+
+Speicherung an Grenzen gekommen, Elektronen können nicht ohne Fehlererzeugung weiter verringert werden
+
+- Möglichkeit der Aufeinanderstaplung in der 3. Dimension
+- Floating Gate aus Siliziumnitrid jetzt Charge Trap
+- Damit ELektronen nicht driften, einbauen von Hürden
+
+![charge-trap](img/elektronen-huerde.png)
+
+## 5.3.5 Modernere Speicherentwicklungen
+
+### 5.3.5.1 Überblick
+
+Moderne nicht-flüchtige SPeicher sind deutlich schneller als FLASH oder EEPRONs.
+
+- Information wird im Gegensatz zu FLASH oder EEPROM nicht in elekrtrischem Feld, sondern mittels ferroelektrischer Materialien in Magnetfeld gespeichert
+- Robust  $10^{10}$ Schreib-Lese-Zyklen
+
+### 5.3.5.2 FRAM
