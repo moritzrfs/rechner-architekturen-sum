@@ -76,7 +76,7 @@
 ## Klausurrelevante Kapitel
 
 [1.4](#Kapitel1.4Röhren), [2.2](#Kapitel2.2KlassifizierungBS), [2.3.4](#Kapitel2.3.4CPU), [2.3.6.2](#2.3.6.2Magnetisch), [2.4](#Kapitel2.4Architekturen), [2.5](#Kapitel2.5PC-Bussystem), [3.3.1](#331-addition), [3.3.6](#336-faktor-2-hoch-x) bis [3.3.10](#3310-sättigungsarithmetik-mmx), [3.4.4](#344-pipelining),
-5.2.2, 5.3, 5.4, 6.2.2, 6.2.8.4, 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
+[5.2.2](#522-dynamisch-dram), [5.3](#53-nichtflüchtige-speicher-rom), [5.4](#54-fehlerkorrektur), [6.2.2](#622-rs232rs485rs322), 6.2.8.4, 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
 
 ---
 
