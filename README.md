@@ -62,6 +62,12 @@
   - [5.3.5 Modernere Speicherentwicklungen](#535-modernere-speicherentwicklungen)
     - [5.3.5.1 Überblick](#5351-überblick)
     - [5.3.5.2 FRAM](#5352-fram)
+    - [5.3.5.3 MRAM](#5353-mram)
+    - [5.3.5.4 Fazit](#5354-fazit)
+  - [5.4 Fehlerkorrektur](#54-fehlerkorrektur)
+    - [5.4.1 Softerror](#541-softerror)
+    - [5.4.2 Parity](#542-parity)
+    - [5.4.3 ECC](#543-ecc)
 
 ## Klausurrelevante Kapitel
 
@@ -720,3 +726,59 @@ Moderne nicht-flüchtige SPeicher sind deutlich schneller als FLASH oder EEPRONs
 - Robust  $10^{10}$ Schreib-Lese-Zyklen
 
 ### 5.3.5.2 FRAM
+
+FRAM-Speicherzellen (Ferroelectric Random Access Memory, auch FeRAM)
+
+- physikalisch ähnlich wie Feldeffekttransistor mit Floating-Gate
+- Speicher- und Löschvorgang ebenfalls durch Polarisationsänderung umgesetzt (ferroelektrische Schicht)
+
+### 5.3.5.3 MRAM
+
+MRAM-Speicherbausteine (Magnetoresistive Random Access Memory)
+
+- Ähnlichkeiten zu GMR-Effekt
+- Phsyikalisch ähnlich zu Feldeffekttransistor mit Floating-Gate
+- unempfindlich gegenüber elektromagnetischer Strahlung
+  - :arrow_right: Luft und Raumfahrt
+  - 50x teurer als FLASH Speicher
+
+### 5.3.5.4 Fazit
+
+- Vermehrte Weiterentwicklung FRAM MRAM
+  - Speicherdichte geringer als FLASH und DRAM
+  - Schwierigkeit in der Integration ferroelektrischer Materialien in konventionelle Chip-Produktion
+
+## 5.4 Fehlerkorrektur
+
+### 5.4.1 Softerror
+
+In Anfangszeit der Speicherbausteine istz es häufig vorgekommen, dass einzelne Bits ihren Wert von alleine geändert haben
+
+- Ursache energiereiche Strahlung radioaktiver Isotope in Gehäusematerialien
+- Gehäuse damals viel größer als heute, da viele Bausteine auf Leiterplatte benötigt wurden
+
+Diese Softerrors wurden mit der Zeit immer weniger da:
+
+- Vergussmaterialien immer ebsser wurden
+- immer weniger Matieral verbaut wurde, das radioaktive Isotope enthält
+- Thema heute wieder relevanter, aufgrund der vielen Gigabyte an Speicher, die verbaut werden
+
+### 5.4.2 Parity
+
+Beeinflussung der Softerrors, erste Maßnahme einfache Paritätsprüfung.
+Für Gruppe von 8-Bit wurde ein 9. Bit als Paritary-Bit eingeführt.
+
+Bei ungerader Anzahl an Bits: Parity-Bit: 0
+Bei gerader Anzahl an Bits: Parity-Bit: 1
+
+![party check](img/parity.png)
+
+Nachteil: bei Umkippen von 2 Bits in einem Datenwort stimmt Paritäts-Prüfung nicht mehr
+
+### 5.4.3 ECC
+
+Weiterentwicklung von Paritätsprüfung EEC (Error Correction Code) Prüfung.
+
+![ecc](img/ecc.png)
+
+Prüfung von umgedrehten Bits in 2-Dimensionalem Array
