@@ -68,6 +68,10 @@
     - [5.4.1 Softerror](#541-softerror)
     - [5.4.2 Parity](#542-parity)
     - [5.4.3 ECC](#543-ecc)
+  - [6.2.2 RS232/RS485/RS322](#622-rs232rs485rs322)
+    - [6.2.2.1 Grundsätzliches](#6221-grundsätzliches)
+    - [6.2.2 RS232](#622-rs232)
+    - [6.2.2.3 RS422](#6223-rs422)
 
 ## Klausurrelevante Kapitel
 
@@ -771,7 +775,7 @@ Für Gruppe von 8-Bit wurde ein 9. Bit als Paritary-Bit eingeführt.
 Bei ungerader Anzahl an Bits: Parity-Bit: 0
 Bei gerader Anzahl an Bits: Parity-Bit: 1
 
-![party check](img/parity.png)
+![parity check](img/parity.png)
 
 Nachteil: bei Umkippen von 2 Bits in einem Datenwort stimmt Paritäts-Prüfung nicht mehr
 
@@ -781,4 +785,81 @@ Weiterentwicklung von Paritätsprüfung EEC (Error Correction Code) Prüfung.
 
 ![ecc](img/ecc.png)
 
-Prüfung von umgedrehten Bits in 2-Dimensionalem Array
+Prüfung von umgedrehten Bits in 2-Dimensionalem Array.
+Dadurch eine doppelte Kontrolle möglich.
+
+## 6.2.2 RS232/RS485/RS322
+
+### 6.2.2.1 Grundsätzliches
+
+RS232 (Recommendes Standard 232) ist ein Übertragungsstandard der 1960er Jahre. 
+
+Nutzung nur noch in Mikrocontroller-Programmierung und Industriebereich.
+
+### 6.2.2 RS232
+
+- Asynchrone, serielle, full duplex Verbindung in Negativ-Logik
+- Übertragung mittels Spannungspegel
+
+![rs232](img/rs232.png)
+
+- Logische 1 = 0 V
+- Logische 0 = 3 V
+
+Häufige Nutzung mit modifiziertem Pegel :arrow_right: RS232-TTL. Umwandlung zwischen RS232 und RS232-TTL mit Baustein MAX232 möglich.
+
+*Bezeichnungen*
+
+Wichtigste 4 Leitungen
+
+| Abkürzung | Bedeutung |
+| --- | --- |
+| TX | Sendeleitung |
+| RX | Empfangsleitung |
+| RTS | Bereit zum Senden |
+| CTS | Bereit zum Empfangen |
+
+Heute hat RS232 Schnittstelle 9 Leitungen. Mindestens notwendig sind 2: (TX/RX)
+
+Bei Verbindung muss festgelegt werden, wie lang (zeitlich) der Abstand zwischen 2 gesendeten Bits sein soll :arrow_right: Baud-Rates
+
+| Bit/Sekunde | Max. Leitungslänge in Meter |
+| --- | --- |
+| 2400 | 900 |
+| 4800 | 300 |
+| 9600 | 150 |
+| 19200 | 15 |
+| 57600 | 5 | 
+| 11520 | <2 |
+
+*UART*
+Baustein zwischen CPU und eigentlicher Schnittstelle. 
+UART (Universal Asynchronous Receiver Transmitter). übernimmt die parallel-seriell-Wandlung (in Mikrocontrollern häufig mit integriert).
+
+*Handshake*
+Damit keine Daten bei Übertragung verloren gehen.
+
+- Software-Handshake
+  - Empfänger sendet Xon jnd Xoff Zeichen um Sender anzuhalten oder wieder fortsetzen zu lassen
+- Hardware-Handshake
+  - Über RTS und CTS Übertragung angelhalten und dann wieder fortgesetzt.
+
+### 6.2.2.3 RS422
+
+Weiterentwicklung der RS232 Schnittstelle und benutzt dasselbe Bitmuster. Signale werden Vollduplex und symmetrisch mit 2 Leitungen pro Richtung.
+
+- 1 Sender kann 10 Empfänger zusammenschalten
+
+![rs422](img/rs422.png)
+
+- Typischerweise bei +-5 V
+- Bereich zwischen 0,2 V und -0,2 V nicht definiert
+- Max. Leitungslänge 1200m
+- Max. Übertragungsrate 10 MBit/s
+  - (nicht gleichzeitig möglich)
+- Ab 200 kBit/s Abschlusswiderstand notwendig
+
+Qualität der Kabel hat großen EInfluss auf max. Kabellänge und Übertragungsrate. 
+
+- Vorteil durch Verdrillung der beiden sym. Adern (Twisted Pair)
+
