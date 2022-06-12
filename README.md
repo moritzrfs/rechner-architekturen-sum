@@ -72,11 +72,14 @@
     - [6.2.2.1 Grundsätzliches](#6221-grundsätzliches)
     - [6.2.2 RS232](#622-rs232)
     - [6.2.2.3 RS422](#6223-rs422)
+    - [6.2.2.4 RS485](#6224-rs485)
+    - [6.2.8.4 USB3](#6284-usb3)
+    - [6.2.9.1 Drahtgebunden](#6291-drahtgebunden)
 
 ## Klausurrelevante Kapitel
 
 [1.4](#Kapitel1.4Röhren), [2.2](#Kapitel2.2KlassifizierungBS), [2.3.4](#Kapitel2.3.4CPU), [2.3.6.2](#2.3.6.2Magnetisch), [2.4](#Kapitel2.4Architekturen), [2.5](#Kapitel2.5PC-Bussystem), [3.3.1](#331-addition), [3.3.6](#336-faktor-2-hoch-x) bis [3.3.10](#3310-sättigungsarithmetik-mmx), [3.4.4](#344-pipelining),
-[5.2.2](#522-dynamisch-dram), [5.3](#53-nichtflüchtige-speicher-rom), [5.4](#54-fehlerkorrektur), [6.2.2](#622-rs232rs485rs322), 6.2.8.4, 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
+[5.2.2](#522-dynamisch-dram), [5.3](#53-nichtflüchtige-speicher-rom), [5.4](#54-fehlerkorrektur), [6.2.2](#622-rs232rs485rs322), [6.2.8.4](#6284-usb3), 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
 
 ---
 
@@ -859,7 +862,115 @@ Weiterentwicklung der RS232 Schnittstelle und benutzt dasselbe Bitmuster. Signal
   - (nicht gleichzeitig möglich)
 - Ab 200 kBit/s Abschlusswiderstand notwendig
 
-Qualität der Kabel hat großen EInfluss auf max. Kabellänge und Übertragungsrate. 
+Qualität der Kabel hat großen EInfluss auf max. Kabellänge und Übertragungsrate.
 
 - Vorteil durch Verdrillung der beiden sym. Adern (Twisted Pair)
 
+### 6.2.2.4 RS485
+
+*Grundsätzliches*
+
+Überführung der RS422 Schnittstelle in Halbduplex. Zusammenschaltung von bis zu 32 Geräten.
+
+- Es existieren Treiberbausteine mit erhöhter Leistung für bis zu 256 Geräte
+- Wegen Halbduplex muss Sendeverstärker jedes Geräts abgeschalten werden.
+
+*Bezugsleitung*
+
+- umgekehrte gegenpasige Polarität: GND-Bezugsleitung kein Stromfluss
+- Geräte erhalten Bezugspotential über das Erdpotential
+  - -7 bis +12 V erlaubt
+  - Bei großen Leitungslängen sollte Bezugspotential mitgeführt werden, sonst evtl. Störung
+
+*Busabschluss*
+
+Da Sender jetzt abschaltbar sind, Möglichkeit, dass kein Sender am Bus aktiv ist.
+
+- Wenn kein Sender aktiv ist und nur $120 \Omega$-Widers-tand genutzt ist, lann der Leitungspegel auf undefinierten Zustand von 0 V fallen.
+- Evtl. Schwungung dadurch und senden zufälliger Signale
+- Lösung Failsafe Busabschluss
+
+![failsafe busabschluss](img/failsafe-busabschluss.png)
+
+*Neuere Versionen*
+- Bei neueren RS485 Bausteinen Verzicht auf Negativ-Komponente
+- Signale nur noch zwischen +5V und 0 V
+- Vereinfachung des Designs
+- Erzeugung negativer Hilfsspannungen fällt weg
+
+### 6.2.8.4 USB3
+
+*USB 3.0*
+
+- Erhöhung der Geschwindigkeit
+- Steckertyp auf mehr Daten-Leitungen erweitern
+- Rückwärts- und Vorwärtskompatibilität erhalten
+- 5 zusätzliche Leitungen als 2 differenzielle-fullduplex-Paare 
+- extra Massenpin
+
+![usb 3](img/usb3.png)
+
+| Pin | Name |Beschreibung |
+| --- | --- | --- |
+| 1 | VBUS | +5V |
+| 2 | D+ | differnetielles Paar 1+ |
+| 3 | D- | differentielles Paar 1- |
+| 4 | Masse | 0V |
+| 5 | SSTX- / SSRX- | differentielles Paar 2- TxRx |
+| 6 | SSTX+ / SSRX+ | differentielles Paar 2+ TxRx |
+| 7 | Masse | Masse für differentielles Paar 2 |
+| 8 | SSTX- / SSRX- | differentielles Paar 2- TxRx |
+| 9 | SSTX+ / SSRX+ | differentielles Paar 2+ TxRx |
+
+:arrow_right: bis zu 5GBit/s durch FUllduplex und Bitcodierung auf der Leitung
+
+- Kennzeichnung USB3-Stecker blaue Buchse
+- statt 0,5 A jetzt 0,9 A
+- 4,5 Watt bei weiterhin 5 V
+- max Kabellänge 3m
+
+*USB3.1 / USB3.2*
+
+- neue große Änderunge neuer Steckertyp: USB Typ-C
+- Einsteckung in beide Richtungen
+- 4 Halbduplex SuperSpeed-Leitungspaare
+
+Neuerungen:
+
+- symmetrischer Stecker
+- 24 Leitungen
+- effizientere Codierung
+- höhere Spannung
+- verschiedene Spannungen möglich
+- Leistung bis 100W
+
+Technische Daten:
+
+- Übertragung bis 10GBit/s
+- Spannungen 5 V, 12 V, 20 V
+- Strom bis 5 A
+- Leistung max. 100 W
+- Max. Kabellänge bei USB 3.1 1m
+
+Bei USB 3.2 Ausnutzung zusätzlicher Leitungen Kabel bis zu 20 GBit/s
+
+### 6.2.9.1 Drahtgebunden
+
+*Allgemeines*
+
+- Physikalisch immer serielle
+- bei parallelen Verbindungen würden bei langen Leitungen Laufzeit-Probleme auftreten (wie Busleitungen in Computern)
+- Ethernet gängiger Standard
+
+*Koaxial*
+
+![koaxial](img/koaxial.png)
+
+- Nur zuverlässig wenn weniger als 10 Teilnehmer verbunden waren
+  - wegen gleichem Übertragungsmedium
+  - oft Kollisionen bei gleichzeitigem Senden
+- Max 10 MBit/s
+- Max Leitungslänge zwischen 2 Teilnehmern 185m
+- Signapegel bei Manchester-Codierung zwischen 0 und -2.2 V
+
+*Twisted Pair 2x2*
