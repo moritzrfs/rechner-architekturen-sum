@@ -77,6 +77,12 @@
     - [6.2.9.1 Drahtgebunden](#6291-drahtgebunden)
   - [7.2.1 Leuchtdioden](#721-leuchtdioden)
     - [7.2.1.1 Einzelne Leuchtdioden](#7211-einzelne-leuchtdioden)
+    - [7.2.1.2 Gruppierte Leuchtdioden](#7212-gruppierte-leuchtdioden)
+  - [7.2.2 LC-Anzeigen](#722-lc-anzeigen)
+    - [7.2.2.1 Grundprinzip](#7221-grundprinzip)
+    - [7.2.2.2 Passive LCDs](#7222-passive-lcds)
+    - [7.2.2.3 LCDs mit integrierter Ansteuerung](#7223-lcds-mit-integrierter-ansteuerung)
+  - [7.3.3 DVI](#733-dvi)
 
 ## Klausurrelevante Kapitel
 
@@ -1059,3 +1065,89 @@ LEDs mit unterschiedlichen Farben:
 - Grüne LEDs gleiches Verhalten wie blau
 - in weißen LEDs sind immer blaue LED-Chips enthalten
 
+### 7.2.1.2 Gruppierte Leuchtdioden
+
+*Einfache Matrix*
+Falls eine größere Zahl LEDs einzusteuern ist:
+
+- multiplexed Matrix
+- LEDs immer nur kurze Zeit angeschaltet
+- Für Helligkeit muss Strom kurzzeitig sehr hoch sein
+  - Einige Ampere kurzzeitig
+
+*7-Segment*
+
+Varianten:
+
+- Gemeinsame Kathode
+- Gemeinsame Anode
+
+![kathode-anode-7segment](img/7-segment.png)
+
+Durch gemeinsamen Anschluss kann 8-facher Strom fließen.
+Deswegen Ausgangspins des anzusteuernden ICs mit Transistoren verstärken
+
+- Variante gemeinsame Anode besser geeignet. Ausgangspins von Mikrocontrollern i.d.R stark genug um Kathoden der LEDs ohne Transistor direkt anzusteuern
+
+## 7.2.2 LC-Anzeigen
+
+### 7.2.2.1 Grundprinzip
+
+LCD (Liquid Crystal Display) basiert auf Flüssigkristallen die Polarisationsrichtung von Licht beeinflussen.
+
+![tn-lc](img/tn-lc.png)
+
+- Bei Polarisation geht 50% verloren
+- Flüssigkristalle zwischen 2 Glasscheiben eingebettet
+- Anlegung auf einer Scheibe senkrecht, andere Waagrecht
+  - Übergang dazwischen Schraubenförmig
+- Bei Spannung Anlegen (Pixel=Aus) :arrow_right: schraubenförmige Anordnung zerstört
+
+Farbdarstellung:
+
+- Farbfilter zwischen Polfilter und Flüssigkristallzelle
+- Wirkungsgrad fällt um 2/3
+- Neue Modelle setzen statt weißem blaues Licht als Hintergrundbeleuchtung ein 
+  - konvertieren grün und rot über Fluoreszenzstoffe oder Quantenpunkten (QLED)
+    - Besserer Wirkungsgrad und verbesserte Farbdarstellung
+
+### 7.2.2.2 Passive LCDs
+
+- normal keine Farbdarstellung
+- Stufen nur Ein/Aus
+- preisgünstig
+- Ansteuerung einfach
+
+Bei einfachen 4-Stelligen Standarddisplays hat jedes Segment extra Pin
+
+- Keine dauerhafte Gleichspannung anlegen, sonst Zerstörung der Flüssigkristalle
+  - Pulsierende Gleichspannung mit max. 1 kHz an Backplane anlegen und an Ein-Segmente invertierte Spannung
+
+### 7.2.2.3 LCDs mit integrierter Ansteuerung
+
+Controller hat 4-Bit Modus, für Ansteuerung nur 7 Leitungen beötigt.
+
+- An Kontrastleitung muss echte einstellbare negative Spannung angelegt werden
+- Erzeugun dieser über Ladungspumpe
+- LCD Module nutzen fast alle SPI-Schnittstelle
+
+## 7.3.3 DVI
+
+DVI Schnittstelle (Digital Visual Interface)
+
+- digitale Schnittstelle
+- Übertragung mittels synchroner, symmetrischer Übertragung
+- 6 einzelne differenzielle Signale
+- Kabel bis zu 10m
+- Synchrones Clock-Signal ebenfalls über Kabel
+- Für Rückwärtskompatibilität 4 analoge Signale (RGB+H-Sync) über Stecker übertragen
+
+Typen:
+
+- DVI-D nur digitale Leitungen genutzt
+- DVI-A nur analoge Leitungen genutzt
+- DVI-I digitale und Analoge genutzt
+
+![dvi stecker](img/dvi-stecker.png)
+
+Übertragung ausschließlich gleichanteilsfrei :arrow_right: Übetragung gleicher Anzahl an 0 und 1.
