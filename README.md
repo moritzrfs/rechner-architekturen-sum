@@ -75,6 +75,8 @@
     - [6.2.2.4 RS485](#6224-rs485)
     - [6.2.8.4 USB3](#6284-usb3)
     - [6.2.9.1 Drahtgebunden](#6291-drahtgebunden)
+  - [7.2.1 Leuchtdioden](#721-leuchtdioden)
+    - [7.2.1.1 Einzelne Leuchtdioden](#7211-einzelne-leuchtdioden)
 
 ## Klausurrelevante Kapitel
 
@@ -974,3 +976,86 @@ Bei USB 3.2 Ausnutzung zusätzlicher Leitungen Kabel bis zu 20 GBit/s
 - Signapegel bei Manchester-Codierung zwischen 0 und -2.2 V
 
 *Twisted Pair 2x2*
+
+![twistedp pair](img/twisted-pair.png)
+
+- Übertragung +-2.5 V
+- symmetrisch
+- full-duplex
+- 1 Adernpaar pro Richtung
+- CAT5 Kabel 100MBit/s
+
+*Twisted Pair 4x2*
+
+- Übertragung 4GBit/s
+- 4 Adernpaare genutzt
+- Fullduplex
+- Übertragung auf allen Aderpaaren gleichzeitig in beide Richtungen
+- Echokompensation an beiden Kabelenden
+
+![twisted pair 4x2](img/twisted-pair4x2.png)
+
+*ix Industrial*
+
+![ix industrial](img/ix-industrial.png)
+
+*Twisted Pair 1x2*
+
+- Industrie Bereich
+- nur noch 1 Adernpaar (SIngle Pair Ethernet)
+- CAT7 bis 1 GBit/s
+- max. Kabellänge 15-40m
+- 1000m mit niedrigen Datenraten (10 MBit/s)
+- PoE möglich
+  - Power over Data Line (PoDL)
+  - 12-48 V mit 0.5-50 W
+
+*Glasfaser*
+
+- Übertragung über optische Glasfasern
+- erst ab 1 GBit/s sinnvoll wegen teuer Technik
+- Kurze Entfernungen (einige 100m) Multimodeglasfaser
+- Lange Entfernungen (einige KM) Monomode Glasfaser
+- Faser Dicke μm-Bereich bei ca. 100-200 μm
+
+![glasfaser](img/glasfaser.png)
+
+- Licht im Infrarotbereich
+  - 850 nm-1550 nm
+- Fullduplex Übertragung
+- Eine Faser pro Richtung
+
+Monomode Übertragung nahezu perfekt. Multimode verbreitert und verschleift Eingangsimpuls (Dispersion)
+
+![multimode monomode](img/multimode-monomode.png)
+
+- Umwandlung von Kupfer auf Glasfaser mittels Medienkonverter (1 GBit/s)
+- Ab 10 GBit/s Transceiver Module direkt in Netzwerkport
+
+*TOSLINK*
+
+- Consumer Audiotechnik
+- Keine Glasfaserübertragung
+- Rotes Licht ca 650 nm über Kunststofflichtwellenleiter übertragen
+- Übertragung unter 10 MBit/s
+- Elektromagnetische Störbeinflussung gering
+
+## 7.2.1 Leuchtdioden
+
+### 7.2.1.1 Einzelne Leuchtdioden
+
+Ansteuerung einer Leuchtdiode mittels Port-Pin
+
+- Möglichkeit Hig
+- Low-aktiv
+
+Digitalausgänge können bei Low-Pegel mehr Strom aufnehmen als sie bei High-Pegel iefern können. :arrow_right: Low-aktiv Version besser
+
+LEDs mit unterschiedlichen Farben:
+
+- Beachtung der Durchlassungsspannung
+- Blaue LEDs über 3 V
+  - bei Controllern mit nur 3 V Versorgungsspannung damit nicht geeignet
+- Grüne LEDs gleiches Verhalten wie blau
+- in weißen LEDs sind immer blaue LED-Chips enthalten
+
