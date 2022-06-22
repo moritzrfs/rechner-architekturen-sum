@@ -68,11 +68,26 @@
     - [5.4.1 Softerror](#541-softerror)
     - [5.4.2 Parity](#542-parity)
     - [5.4.3 ECC](#543-ecc)
+  - [6.2.2 RS232/RS485/RS322](#622-rs232rs485rs322)
+    - [6.2.2.1 Grundsätzliches](#6221-grundsätzliches)
+    - [6.2.2 RS232](#622-rs232)
+    - [6.2.2.3 RS422](#6223-rs422)
+    - [6.2.2.4 RS485](#6224-rs485)
+    - [6.2.8.4 USB3](#6284-usb3)
+    - [6.2.9.1 Drahtgebunden](#6291-drahtgebunden)
+  - [7.2.1 Leuchtdioden](#721-leuchtdioden)
+    - [7.2.1.1 Einzelne Leuchtdioden](#7211-einzelne-leuchtdioden)
+    - [7.2.1.2 Gruppierte Leuchtdioden](#7212-gruppierte-leuchtdioden)
+  - [7.2.2 LC-Anzeigen](#722-lc-anzeigen)
+    - [7.2.2.1 Grundprinzip](#7221-grundprinzip)
+    - [7.2.2.2 Passive LCDs](#7222-passive-lcds)
+    - [7.2.2.3 LCDs mit integrierter Ansteuerung](#7223-lcds-mit-integrierter-ansteuerung)
+  - [7.3.3 DVI](#733-dvi)
 
 ## Klausurrelevante Kapitel
 
 [1.4](#Kapitel1.4Röhren), [2.2](#Kapitel2.2KlassifizierungBS), [2.3.4](#Kapitel2.3.4CPU), [2.3.6.2](#2.3.6.2Magnetisch), [2.4](#Kapitel2.4Architekturen), [2.5](#Kapitel2.5PC-Bussystem), [3.3.1](#331-addition), [3.3.6](#336-faktor-2-hoch-x) bis [3.3.10](#3310-sättigungsarithmetik-mmx), [3.4.4](#344-pipelining),
-5.2.2, 5.3, 5.4, 6.2.2, 6.2.8.4, 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
+[5.2.2](#522-dynamisch-dram), [5.3](#53-nichtflüchtige-speicher-rom), [5.4](#54-fehlerkorrektur), [6.2.2](#622-rs232rs485rs322), [6.2.8.4](#6284-usb3), 6.2.9.1, 7.2.1, 7.2.2, 7.3.3
 
 ---
 
@@ -771,7 +786,7 @@ Für Gruppe von 8-Bit wurde ein 9. Bit als Paritary-Bit eingeführt.
 Bei ungerader Anzahl an Bits: Parity-Bit: 0
 Bei gerader Anzahl an Bits: Parity-Bit: 1
 
-![party check](img/parity.png)
+![parity check](img/parity.png)
 
 Nachteil: bei Umkippen von 2 Bits in einem Datenwort stimmt Paritäts-Prüfung nicht mehr
 
@@ -781,4 +796,358 @@ Weiterentwicklung von Paritätsprüfung EEC (Error Correction Code) Prüfung.
 
 ![ecc](img/ecc.png)
 
-Prüfung von umgedrehten Bits in 2-Dimensionalem Array
+Prüfung von umgedrehten Bits in 2-Dimensionalem Array.
+Dadurch eine doppelte Kontrolle möglich.
+
+## 6.2.2 RS232/RS485/RS322
+
+### 6.2.2.1 Grundsätzliches
+
+RS232 (Recommendes Standard 232) ist ein Übertragungsstandard der 1960er Jahre. 
+
+Nutzung nur noch in Mikrocontroller-Programmierung und Industriebereich.
+
+### 6.2.2 RS232
+
+- Asynchrone, serielle, full duplex Verbindung in Negativ-Logik
+- Übertragung mittels Spannungspegel
+
+![rs232](img/rs232.png)
+
+- Logische 1 = 0 V
+- Logische 0 = 3 V
+
+Häufige Nutzung mit modifiziertem Pegel :arrow_right: RS232-TTL. Umwandlung zwischen RS232 und RS232-TTL mit Baustein MAX232 möglich.
+
+*Bezeichnungen*
+
+Wichtigste 4 Leitungen
+
+| Abkürzung | Bedeutung |
+| --- | --- |
+| TX | Sendeleitung |
+| RX | Empfangsleitung |
+| RTS | Bereit zum Senden |
+| CTS | Bereit zum Empfangen |
+
+Heute hat RS232 Schnittstelle 9 Leitungen. Mindestens notwendig sind 2: (TX/RX)
+
+Bei Verbindung muss festgelegt werden, wie lang (zeitlich) der Abstand zwischen 2 gesendeten Bits sein soll :arrow_right: Baud-Rates
+
+| Bit/Sekunde | Max. Leitungslänge in Meter |
+| --- | --- |
+| 2400 | 900 |
+| 4800 | 300 |
+| 9600 | 150 |
+| 19200 | 15 |
+| 57600 | 5 | 
+| 11520 | <2 |
+
+*UART*
+Baustein zwischen CPU und eigentlicher Schnittstelle. 
+UART (Universal Asynchronous Receiver Transmitter). übernimmt die parallel-seriell-Wandlung (in Mikrocontrollern häufig mit integriert).
+
+*Handshake*
+Damit keine Daten bei Übertragung verloren gehen.
+
+- Software-Handshake
+  - Empfänger sendet Xon jnd Xoff Zeichen um Sender anzuhalten oder wieder fortsetzen zu lassen
+- Hardware-Handshake
+  - Über RTS und CTS Übertragung angelhalten und dann wieder fortgesetzt.
+
+### 6.2.2.3 RS422
+
+Weiterentwicklung der RS232 Schnittstelle und benutzt dasselbe Bitmuster. Signale werden Vollduplex und symmetrisch mit 2 Leitungen pro Richtung.
+
+- 1 Sender kann 10 Empfänger zusammenschalten
+
+![rs422](img/rs422.png)
+
+- Typischerweise bei +-5 V
+- Bereich zwischen 0,2 V und -0,2 V nicht definiert
+- Max. Leitungslänge 1200m
+- Max. Übertragungsrate 10 MBit/s
+  - (nicht gleichzeitig möglich)
+- Ab 200 kBit/s Abschlusswiderstand notwendig
+
+Qualität der Kabel hat großen EInfluss auf max. Kabellänge und Übertragungsrate.
+
+- Vorteil durch Verdrillung der beiden sym. Adern (Twisted Pair)
+
+### 6.2.2.4 RS485
+
+*Grundsätzliches*
+
+Überführung der RS422 Schnittstelle in Halbduplex. Zusammenschaltung von bis zu 32 Geräten.
+
+- Es existieren Treiberbausteine mit erhöhter Leistung für bis zu 256 Geräte
+- Wegen Halbduplex muss Sendeverstärker jedes Geräts abgeschalten werden.
+
+*Bezugsleitung*
+
+- umgekehrte gegenpasige Polarität: GND-Bezugsleitung kein Stromfluss
+- Geräte erhalten Bezugspotential über das Erdpotential
+  - -7 bis +12 V erlaubt
+  - Bei großen Leitungslängen sollte Bezugspotential mitgeführt werden, sonst evtl. Störung
+
+*Busabschluss*
+
+Da Sender jetzt abschaltbar sind, Möglichkeit, dass kein Sender am Bus aktiv ist.
+
+- Wenn kein Sender aktiv ist und nur $120 \Omega$-Widers-tand genutzt ist, lann der Leitungspegel auf undefinierten Zustand von 0 V fallen.
+- Evtl. Schwungung dadurch und senden zufälliger Signale
+- Lösung Failsafe Busabschluss
+
+![failsafe busabschluss](img/failsafe-busabschluss.png)
+
+*Neuere Versionen*
+- Bei neueren RS485 Bausteinen Verzicht auf Negativ-Komponente
+- Signale nur noch zwischen +5V und 0 V
+- Vereinfachung des Designs
+- Erzeugung negativer Hilfsspannungen fällt weg
+
+### 6.2.8.4 USB3
+
+*USB 3.0*
+
+- Erhöhung der Geschwindigkeit
+- Steckertyp auf mehr Daten-Leitungen erweitern
+- Rückwärts- und Vorwärtskompatibilität erhalten
+- 5 zusätzliche Leitungen als 2 differenzielle-fullduplex-Paare 
+- extra Massenpin
+
+![usb 3](img/usb3.png)
+
+| Pin | Name |Beschreibung |
+| --- | --- | --- |
+| 1 | VBUS | +5V |
+| 2 | D+ | differnetielles Paar 1+ |
+| 3 | D- | differentielles Paar 1- |
+| 4 | Masse | 0V |
+| 5 | SSTX- / SSRX- | differentielles Paar 2- TxRx |
+| 6 | SSTX+ / SSRX+ | differentielles Paar 2+ TxRx |
+| 7 | Masse | Masse für differentielles Paar 2 |
+| 8 | SSTX- / SSRX- | differentielles Paar 2- TxRx |
+| 9 | SSTX+ / SSRX+ | differentielles Paar 2+ TxRx |
+
+:arrow_right: bis zu 5GBit/s durch FUllduplex und Bitcodierung auf der Leitung
+
+- Kennzeichnung USB3-Stecker blaue Buchse
+- statt 0,5 A jetzt 0,9 A
+- 4,5 Watt bei weiterhin 5 V
+- max Kabellänge 3m
+
+*USB3.1 / USB3.2*
+
+- neue große Änderunge neuer Steckertyp: USB Typ-C
+- Einsteckung in beide Richtungen
+- 4 Halbduplex SuperSpeed-Leitungspaare
+
+Neuerungen:
+
+- symmetrischer Stecker
+- 24 Leitungen
+- effizientere Codierung
+- höhere Spannung
+- verschiedene Spannungen möglich
+- Leistung bis 100W
+
+Technische Daten:
+
+- Übertragung bis 10GBit/s
+- Spannungen 5 V, 12 V, 20 V
+- Strom bis 5 A
+- Leistung max. 100 W
+- Max. Kabellänge bei USB 3.1 1m
+
+Bei USB 3.2 Ausnutzung zusätzlicher Leitungen Kabel bis zu 20 GBit/s
+
+### 6.2.9.1 Drahtgebunden
+
+*Allgemeines*
+
+- Physikalisch immer serielle
+- bei parallelen Verbindungen würden bei langen Leitungen Laufzeit-Probleme auftreten (wie Busleitungen in Computern)
+- Ethernet gängiger Standard
+
+*Koaxial*
+
+![koaxial](img/koaxial.png)
+
+- Nur zuverlässig wenn weniger als 10 Teilnehmer verbunden waren
+  - wegen gleichem Übertragungsmedium
+  - oft Kollisionen bei gleichzeitigem Senden
+- Max 10 MBit/s
+- Max Leitungslänge zwischen 2 Teilnehmern 185m
+- Signapegel bei Manchester-Codierung zwischen 0 und -2.2 V
+
+*Twisted Pair 2x2*
+
+![twistedp pair](img/twisted-pair.png)
+
+- Übertragung +-2.5 V
+- symmetrisch
+- full-duplex
+- 1 Adernpaar pro Richtung
+- CAT5 Kabel 100MBit/s
+
+*Twisted Pair 4x2*
+
+- Übertragung 4GBit/s
+- 4 Adernpaare genutzt
+- Fullduplex
+- Übertragung auf allen Aderpaaren gleichzeitig in beide Richtungen
+- Echokompensation an beiden Kabelenden
+
+![twisted pair 4x2](img/twisted-pair4x2.png)
+
+*ix Industrial*
+
+![ix industrial](img/ix-industrial.png)
+
+*Twisted Pair 1x2*
+
+- Industrie Bereich
+- nur noch 1 Adernpaar (SIngle Pair Ethernet)
+- CAT7 bis 1 GBit/s
+- max. Kabellänge 15-40m
+- 1000m mit niedrigen Datenraten (10 MBit/s)
+- PoE möglich
+  - Power over Data Line (PoDL)
+  - 12-48 V mit 0.5-50 W
+
+*Glasfaser*
+
+- Übertragung über optische Glasfasern
+- erst ab 1 GBit/s sinnvoll wegen teuer Technik
+- Kurze Entfernungen (einige 100m) Multimodeglasfaser
+- Lange Entfernungen (einige KM) Monomode Glasfaser
+- Faser Dicke μm-Bereich bei ca. 100-200 μm
+
+![glasfaser](img/glasfaser.png)
+
+- Licht im Infrarotbereich
+  - 850 nm-1550 nm
+- Fullduplex Übertragung
+- Eine Faser pro Richtung
+
+Monomode Übertragung nahezu perfekt. Multimode verbreitert und verschleift Eingangsimpuls (Dispersion)
+
+![multimode monomode](img/multimode-monomode.png)
+
+- Umwandlung von Kupfer auf Glasfaser mittels Medienkonverter (1 GBit/s)
+- Ab 10 GBit/s Transceiver Module direkt in Netzwerkport
+
+*TOSLINK*
+
+- Consumer Audiotechnik
+- Keine Glasfaserübertragung
+- Rotes Licht ca 650 nm über Kunststofflichtwellenleiter übertragen
+- Übertragung unter 10 MBit/s
+- Elektromagnetische Störbeinflussung gering
+
+## 7.2.1 Leuchtdioden
+
+### 7.2.1.1 Einzelne Leuchtdioden
+
+Ansteuerung einer Leuchtdiode mittels Port-Pin
+
+- Möglichkeit Hig
+- Low-aktiv
+
+Digitalausgänge können bei Low-Pegel mehr Strom aufnehmen als sie bei High-Pegel iefern können. :arrow_right: Low-aktiv Version besser
+
+LEDs mit unterschiedlichen Farben:
+
+- Beachtung der Durchlassungsspannung
+- Blaue LEDs über 3 V
+  - bei Controllern mit nur 3 V Versorgungsspannung damit nicht geeignet
+- Grüne LEDs gleiches Verhalten wie blau
+- in weißen LEDs sind immer blaue LED-Chips enthalten
+
+### 7.2.1.2 Gruppierte Leuchtdioden
+
+*Einfache Matrix*
+Falls eine größere Zahl LEDs einzusteuern ist:
+
+- multiplexed Matrix
+- LEDs immer nur kurze Zeit angeschaltet
+- Für Helligkeit muss Strom kurzzeitig sehr hoch sein
+  - Einige Ampere kurzzeitig
+
+*7-Segment*
+
+Varianten:
+
+- Gemeinsame Kathode
+- Gemeinsame Anode
+
+![kathode-anode-7segment](img/7-segment.png)
+
+Durch gemeinsamen Anschluss kann 8-facher Strom fließen.
+Deswegen Ausgangspins des anzusteuernden ICs mit Transistoren verstärken
+
+- Variante gemeinsame Anode besser geeignet. Ausgangspins von Mikrocontrollern i.d.R stark genug um Kathoden der LEDs ohne Transistor direkt anzusteuern
+
+## 7.2.2 LC-Anzeigen
+
+### 7.2.2.1 Grundprinzip
+
+LCD (Liquid Crystal Display) basiert auf Flüssigkristallen die Polarisationsrichtung von Licht beeinflussen.
+
+![tn-lc](img/tn-lc.png)
+
+- Bei Polarisation geht 50% verloren
+- Flüssigkristalle zwischen 2 Glasscheiben eingebettet
+- Anlegung auf einer Scheibe senkrecht, andere Waagrecht
+  - Übergang dazwischen Schraubenförmig
+- Bei Spannung Anlegen (Pixel=Aus) :arrow_right: schraubenförmige Anordnung zerstört
+
+Farbdarstellung:
+
+- Farbfilter zwischen Polfilter und Flüssigkristallzelle
+- Wirkungsgrad fällt um 2/3
+- Neue Modelle setzen statt weißem blaues Licht als Hintergrundbeleuchtung ein 
+  - konvertieren grün und rot über Fluoreszenzstoffe oder Quantenpunkten (QLED)
+    - Besserer Wirkungsgrad und verbesserte Farbdarstellung
+
+### 7.2.2.2 Passive LCDs
+
+- normal keine Farbdarstellung
+- Stufen nur Ein/Aus
+- preisgünstig
+- Ansteuerung einfach
+
+Bei einfachen 4-Stelligen Standarddisplays hat jedes Segment extra Pin
+
+- Keine dauerhafte Gleichspannung anlegen, sonst Zerstörung der Flüssigkristalle
+  - Pulsierende Gleichspannung mit max. 1 kHz an Backplane anlegen und an Ein-Segmente invertierte Spannung
+
+### 7.2.2.3 LCDs mit integrierter Ansteuerung
+
+Controller hat 4-Bit Modus, für Ansteuerung nur 7 Leitungen beötigt.
+
+- An Kontrastleitung muss echte einstellbare negative Spannung angelegt werden
+- Erzeugun dieser über Ladungspumpe
+- LCD Module nutzen fast alle SPI-Schnittstelle
+
+## 7.3.3 DVI
+
+DVI Schnittstelle (Digital Visual Interface)
+
+- digitale Schnittstelle
+- Übertragung mittels synchroner, symmetrischer Übertragung
+- 6 einzelne differenzielle Signale
+- Kabel bis zu 10m
+- Synchrones Clock-Signal ebenfalls über Kabel
+- Für Rückwärtskompatibilität 4 analoge Signale (RGB+H-Sync) über Stecker übertragen
+
+Typen:
+
+- DVI-D nur digitale Leitungen genutzt
+- DVI-A nur analoge Leitungen genutzt
+- DVI-I digitale und Analoge genutzt
+
+![dvi stecker](img/dvi-stecker.png)
+
+Übertragung ausschließlich gleichanteilsfrei :arrow_right: Übetragung gleicher Anzahl an 0 und 1.
